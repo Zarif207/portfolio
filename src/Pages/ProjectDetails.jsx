@@ -13,7 +13,7 @@ export default function ProjectDetails() {
     (p) => String(p.id) === String(id)
   );
 
-  /* ================= GSAP EFFECTS ================= */
+ 
   useEffect(() => {
     if (!project) return;
 
@@ -81,7 +81,7 @@ export default function ProjectDetails() {
           transition={{ duration: 0.6, delay: 0.2 }}
         />
 
-        {/* STACK */}
+    
         <motion.h3
           className="text-sm tracking-widest mb-3"
           initial={{ opacity: 0 }}

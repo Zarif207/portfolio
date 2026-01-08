@@ -12,6 +12,7 @@ export default function About() {
   const hasTypedRef = useRef(false);
 
   const terminalEndRef = useRef(null);
+  
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
