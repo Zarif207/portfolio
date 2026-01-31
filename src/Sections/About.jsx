@@ -12,7 +12,6 @@ export default function About() {
   const hasTypedRef = useRef(false);
 
   const terminalEndRef = useRef(null);
-  
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -29,7 +28,7 @@ export default function About() {
     const initialMatrix = Array.from({ length: columns }, () => ({
       chars: Array.from(
         { length: rows },
-        () => chars[Math.floor(Math.random() * chars.length)]
+        () => chars[Math.floor(Math.random() * chars.length)],
       ),
     }));
 
@@ -43,7 +42,7 @@ export default function About() {
             ...col.chars.slice(1),
             chars[Math.floor(Math.random() * chars.length)],
           ],
-        }))
+        })),
       );
     }, 160);
 
@@ -132,7 +131,7 @@ export default function About() {
           startTyping();
         }
       },
-      { threshold: 0.35 }
+      { threshold: 0.35 },
     );
 
     if (terminalRef.current) observer.observe(terminalRef.current);
@@ -220,13 +219,17 @@ export default function About() {
               </div>
             </div>
 
-            <motion.button
+            <motion.a
+              href="https://drive.google.com/file/d/1cDUxLG8PgAn1a_BmcE4SYpElkQO15U4z/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
     mt-10 px-7 py-2.5
     bg-transparent border-2 border-white
     text-white text-xs font-bold tracking-widest
     transition-all duration-300
     hover:bg-white hover:text-black
+    inline-block
   "
               whileHover={{
                 scale: 1.02,
@@ -235,7 +238,7 @@ export default function About() {
               whileTap={{ scale: 0.98 }}
             >
               DOWNLOAD RESUME
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           {/* RIGHT TERMINAL */}

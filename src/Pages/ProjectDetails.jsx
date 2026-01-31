@@ -9,11 +9,8 @@ export default function ProjectDetails() {
   const imageRef = useRef(null);
   const lineRef = useRef(null);
 
-  const project = projects.find(
-    (p) => String(p.id) === String(id)
-  );
+  const project = projects.find((p) => String(p.id) === String(id));
 
- 
   useEffect(() => {
     if (!project) return;
 
@@ -30,7 +27,7 @@ export default function ProjectDetails() {
     gsap.fromTo(
       lineRef.current,
       { width: 0 },
-      { width: "3rem", duration: 1.2, ease: "power2.out", delay: 0.4 }
+      { width: "3rem", duration: 1.2, ease: "power2.out", delay: 0.4 },
     );
   }, [project]);
 
@@ -53,7 +50,6 @@ export default function ProjectDetails() {
       transition={{ duration: 0.6 }}
     >
       <div className="relative z-10 max-w-4xl mx-auto px-6">
-
         {/* TITLE */}
         <motion.h1
           className="text-3xl font-bold tracking-widest mb-4"
@@ -65,10 +61,7 @@ export default function ProjectDetails() {
         </motion.h1>
 
         {/* UNDERLINE */}
-        <div
-          ref={lineRef}
-          className="h-[2px] bg-white mb-10"
-        />
+        <div ref={lineRef} className="h-[2px] bg-white mb-10" />
 
         {/* IMAGE */}
         <motion.img
@@ -81,7 +74,6 @@ export default function ProjectDetails() {
           transition={{ duration: 0.6, delay: 0.2 }}
         />
 
-    
         <motion.h3
           className="text-sm tracking-widest mb-3"
           initial={{ opacity: 0 }}
@@ -190,7 +182,6 @@ export default function ProjectDetails() {
             </motion.li>
           ))}
         </ul>
-
       </div>
     </motion.section>
   );
