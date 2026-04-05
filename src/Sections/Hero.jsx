@@ -123,12 +123,12 @@ $ git push`}
         </p>
 
         {/* SOCIAL LINKS */}
-        <div className="flex justify-center gap-4 sm:gap-5 mt-10 sm:mt-12">
+        <div className="flex justify-center gap-3 mt-10 sm:mt-12">
           <a
             href="https://github.com/Zarif207"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 sm:w-12 sm:h-12 border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-black transition"
+            className="social-icon w-11 h-11 border border-white/25 flex items-center justify-center text-white text-[1.6rem] transition-all duration-200 ease-in-out hover:bg-white hover:text-black hover:border-white"
           >
             <FaGithub />
           </a>
@@ -137,7 +137,7 @@ $ git push`}
             href="https://www.linkedin.com/in/zarif-hasan5/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 sm:w-12 sm:h-12 border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-black transition"
+            className="social-icon w-11 h-11 border border-white/25 flex items-center justify-center text-white text-[1.6rem] transition-all duration-200 ease-in-out hover:bg-white hover:text-black hover:border-white"
           >
             <FaLinkedinIn />
           </a>
@@ -146,7 +146,7 @@ $ git push`}
             href="https://web.facebook.com/zarif.hasan.5059"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-11 h-11 sm:w-12 sm:h-12 border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-black transition"
+            className="social-icon w-11 h-11 border border-white/25 flex items-center justify-center text-white text-[1.6rem] transition-all duration-200 ease-in-out hover:bg-white hover:text-black hover:border-white"
           >
             <FaFacebook />
           </a>

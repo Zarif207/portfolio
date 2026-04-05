@@ -1,8 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-html {
-  scroll-behavior: smooth;
+@keyframes icon-flash {
+  0%   { opacity: 1; }
+  15%  { opacity: 0; }
+  30%  { opacity: 1; }
+  45%  { opacity: 0.2; }
+  60%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.social-icon:hover,
+a[class*="border"]:hover,
+button:not([disabled]):hover {
+  animation: icon-flash 0.35s ease-in-out forwards;
 }
 
 body {
