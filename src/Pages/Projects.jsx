@@ -19,10 +19,19 @@ export default function Projects() {
             return (
               <div
                 key={p.id}
-                className={`border p-5 sm:p-6 transition ${
+                className={`relative overflow-hidden border p-5 sm:p-6 transition ${
                   isOngoing ? "border-yellow-500/40 opacity-80" : "border-white/60"
                 }`}
               >
+                {/* TEAM BADGE — OnWay only */}
+                {p.id === "onway" && (
+                  <>
+                    <div className="absolute top-0 right-0 w-0 h-0 border-t-[72px] border-l-[72px] sm:border-t-[84px] sm:border-l-[84px] border-t-white border-l-transparent z-10 pointer-events-none" />
+                    <span className="absolute top-[14px] right-[6px] sm:top-[16px] sm:right-[7px] z-20 text-black text-[9px] sm:text-[10px] font-extrabold tracking-tight rotate-45 leading-none pointer-events-none">
+                      TEAM
+                    </span>
+                  </>
+                )}
                 {/* Image */}
                 <div className="relative border border-white/40 mb-5 sm:mb-6">
                   <img
