@@ -1,6 +1,7 @@
 import cropzenImg from "../assets/cropzen.png";
 import tixgoImg from "../assets/tixgo.png";
 import botaniImg from "../assets/botani.png";
+import onwayImg from "../assets/OnWay.png";
 
 export const projects = [
   {
@@ -44,6 +45,78 @@ export const projects = [
   },
 
   {
+    id: "onway",
+    name: "OnWay — Smart Ride Sharing Platform",
+    image: onwayImg, 
+    stack: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.io",
+      "Cloudinary",
+      "SSLCommerz",
+      "JWT Auth",
+    ],
+    live: "https://onway-5g8a.onrender.com",
+    github: "https://github.com/Zarif207/onway-client.git",
+
+    description:
+      "A full-stack ride-sharing platform designed to provide safe, reliable, and real-time transportation services. OnWay connects riders and drivers with smart matching, live tracking, secure payments, and AI-powered features. This was a collaborative team project built by a group of 5 developers.",
+
+    team: {
+      type: "Team Project",
+      totalMembers: 5,
+      members: [
+        "Zarif Hasan",
+        "Minhajur Rahman",
+        "Shourav Hasan",
+        "Istheak Ahmed",
+        "Zubaer",
+      ],
+    },
+
+    challenges: [
+      "Implementing real-time driver-rider matching using location data",
+      "Handling live GPS tracking with smooth map updates",
+      "Integrating secure SSLCommerz payment gateway",
+      "Building OTP-based ride verification system",
+      "Ensuring secure KYC and face verification flow",
+      "Managing socket-based real-time communication (chat & updates)",
+    ],
+
+    features: [
+      "Smart instant ride booking system",
+      "Real-time GPS tracking of drivers",
+      "Fare estimation before booking",
+      "In-app call and chat system",
+      "Secure digital payments (SSLCommerz)",
+      "Ride history with invoice tracking",
+      "SOS emergency safety feature",
+      "Real-time driver matching system",
+      "Face verification for rider safety",
+      "Driving license & NID data extraction (AI/OCR)",
+      "OTP-based ride verification",
+      "Driver rating and review system",
+      "Promo codes and discounts",
+      "AI-powered chatbot support",
+      "Demand prediction system",
+      "Weather-based dynamic pricing",
+    ],
+
+    future: [
+      "Advanced AI-based driver allocation",
+      "Voice assistant for ride booking",
+      "Multi-city expansion system",
+      "Subscription-based ride plans",
+      "Real-time traffic-based smart routing",
+      "Enhanced fraud detection system",
+    ],
+  },
+
+  {
     id: "tixgo",
     name: "TixGo — Online Ticket Booking Platform",
     image: tixgoImg, // update image path if needed
@@ -60,7 +133,7 @@ export const projects = [
       "Recharts",
     ],
     live: "https://tixgo.netlify.app/",
-    github: "https://github.com/Zarif207/tixgo-client.git", 
+    github: "https://github.com/Zarif207/tixgo-client.git",
     description:
       "A MERN-based online ticket booking platform where users can discover and book travel tickets (Bus, Train, Launch, Plane) with role-based dashboards, secure payments, and real-time booking management.",
     challenges: [
