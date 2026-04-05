@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { projects } from "../Data/projects";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
@@ -6,6 +6,7 @@ import gsap from "gsap";
 
 export default function ProjectDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const imageRef = useRef(null);
   const lineRef = useRef(null);
 
@@ -44,12 +45,19 @@ export default function ProjectDetails() {
 
   return (
     <motion.section
-      className="relative py-32"
+      className="relative py-24 sm:py-32"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
+        {/* BACK BUTTON */}
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-8 border border-gray-500 px-4 py-2 text-sm tracking-widest hover:bg-white hover:text-black transition"
+        >
+          ← Back
+        </button>
         {/* TITLE */}
         <motion.h1
           className="text-3xl font-bold tracking-widest mb-4"

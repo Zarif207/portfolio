@@ -1,10 +1,15 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'JetBrains Mono', monospace;
   color: white;
   background-color: #101010;
+  overflow-x: hidden;
 
   /* GRID BACKGROUND */
   background-image:

@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const tickingRef = useRef(false);
 
-  // Explicit mapping (NO guesswork)
   const links = [
     { label: "HOME", id: "home" },
     { label: "ABOUT", id: "about" },
@@ -14,17 +14,14 @@ export default function Navbar() {
     { label: "CONTACT", id: "contact" },
   ];
 
-  /* ================= SMOOTH SCROLL ================= */
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (!element) return;
-
     element.scrollIntoView({ behavior: "smooth", block: "start" });
     setActiveSection(id);
     setOpen(false);
   };
 
-  /* ================= ACTIVE SECTION TRACK ================= */
   useEffect(() => {
     const sectionIds = links.map((l) => l.id);
 
@@ -38,7 +35,6 @@ export default function Navbar() {
         for (const id of sectionIds) {
           const el = document.getElementById(id);
           if (!el) continue;
-
           const rect = el.getBoundingClientRect();
           if (rect.top <= offset && rect.bottom >= offset) {
             setActiveSection(id);
@@ -54,10 +50,9 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ================= UI ================= */
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/10 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
         {/* LOGO */}
         <h1
           onClick={() => scrollToSection("home")}
@@ -73,9 +68,7 @@ export default function Navbar() {
               key={id}
               onClick={() => scrollToSection(id)}
               className={`relative cursor-pointer transition ${
-                activeSection === id
-                  ? "opacity-100"
-                  : "opacity-80 hover:opacity-100"
+                activeSection === id ? "opacity-100" : "opacity-80 hover:opacity-100"
               }`}
             >
               <span
@@ -89,10 +82,10 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* MOBILE BUTTON */}
+        {/* HAMBURGER */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white text-xl"
+          className="md:hidden text-white w-10 h-10 flex items-center justify-center text-xl"
           aria-label="Toggle menu"
         >
           {open ? "✕" : "☰"}
@@ -100,25 +93,34 @@ export default function Navbar() {
       </div>
 
       {/* MOBILE MENU */}
-      {open && (
-        <div className="md:hidden bg-black/90 backdrop-blur-md border-t border-white/10">
-          <ul className="flex flex-col items-center gap-6 py-8 text-white text-sm">
-            {links.map(({ label, id }) => (
-              <li
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className={`cursor-pointer transition ${
-                  activeSection === id
-                    ? "opacity-100 font-semibold"
-                    : "opacity-80 hover:opacity-100"
-                }`}
-              >
-                {label}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="md:hidden bg-black/95 backdrop-blur-md border-t border-white/10 overflow-hidden"
+          >
+            <ul className="flex flex-col items-center gap-6 py-8 text-white text-sm">
+              {links.map(({ label, id }) => (
+                <li
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className={`cursor-pointer tracking-widest transition ${
+                    activeSection === id
+                      ? "opacity-100 font-semibold"
+                      : "opacity-70 hover:opacity-100"
+                  }`}
+                >
+                  {label}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

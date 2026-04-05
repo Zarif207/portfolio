@@ -7,7 +7,7 @@ import Contact from "../Sections/Contact";
 
 export default function Home() {
   return (
-    <div className="text-white text-5xl">
+    <div className="text-white overflow-x-hidden">
       <Navbar/>
       <Hero/>
       <About/>

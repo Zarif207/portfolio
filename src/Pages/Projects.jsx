@@ -3,34 +3,32 @@ import { projects } from "../Data/projects";
 
 export default function Projects() {
   return (
-    <section id="projects" className="relative py-32 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl tracking-widest font-bold text-white">
+    <section id="projects" className="relative py-24 sm:py-32 overflow-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-14 sm:mb-20">
+          <h2 className="text-3xl sm:text-4xl tracking-widest font-bold text-white">
             PROJECTS
           </h2>
           <div className="w-14 h-[2px] bg-white mx-auto mt-4" />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
           {projects.map((p) => {
             const isOngoing = p.status === "ongoing";
 
             return (
               <div
                 key={p.id}
-                className={`border p-6 transition ${
-                  isOngoing
-                    ? "border-yellow-500/40 opacity-80"
-                    : "border-white/60"
+                className={`border p-5 sm:p-6 transition ${
+                  isOngoing ? "border-yellow-500/40 opacity-80" : "border-white/60"
                 }`}
               >
-                {/* Image with overlay */}
-                <div className="relative border border-white/40 mb-6">
+                {/* Image */}
+                <div className="relative border border-white/40 mb-5 sm:mb-6">
                   <img
                     src={p.image}
                     alt={p.name}
-                    className={`h-40 w-full object-cover ${
+                    className={`h-44 w-full object-cover ${
                       isOngoing ? "blur-[1px] brightness-50" : ""
                     }`}
                   />
@@ -55,14 +53,14 @@ export default function Projects() {
                 {isOngoing ? (
                   <button
                     disabled
-                    className="inline-flex items-center gap-2 border border-yellow-500/40 bg-yellow-500/10 text-yellow-400 px-4 py-2 text-xs tracking-widest cursor-not-allowed select-none"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-yellow-500/40 bg-yellow-500/10 text-yellow-400 px-4 py-3 sm:py-2 text-xs tracking-widest cursor-not-allowed select-none"
                   >
                     🚧 Working on it
                   </button>
                 ) : (
                   <Link
                     to={`/projects/${p.id}`}
-                    className="inline-block border border-white px-4 py-2 text-xs tracking-widest hover:bg-white hover:text-black transition"
+                    className="w-full sm:w-auto inline-block text-center border border-white px-4 py-3 sm:py-2 text-xs tracking-widest hover:bg-white hover:text-black transition"
                   >
                     DETAILS →
                   </Link>
