@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import {
   FaHtml5,
@@ -14,6 +15,7 @@ import {
   SiMongodb,
   SiFirebase,
   SiVercel,
+  SiNextdotjs,
 } from "react-icons/si";
 
 export default function Skills() {
@@ -27,7 +29,7 @@ export default function Skills() {
         className="absolute inset-0 
         bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),
             linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)]
-        bg-[size:40px_40px]"
+        bg-size-[40px_40px]"
       />
 
       {/* NOISE */}
@@ -46,7 +48,7 @@ export default function Skills() {
             TECH & STACK
           </h2>
 
-          <div className="w-14 h-[2px] bg-white mx-auto mt-4" />
+          <div className="w-14 h-0.5 bg-white mx-auto mt-4" />
         </motion.div>
 
         {/* FRONTEND */}
@@ -55,6 +57,7 @@ export default function Skills() {
           <Skill icon={<FaCss3Alt />} label="CSS3" />
           <Skill icon={<FaJs />} label="JavaScript" />
           <Skill icon={<FaReact />} label="React" />
+          <Skill icon={<SiNextdotjs />} label="Next.js" />
           <Skill icon={<SiTailwindcss />} label="Tailwind CSS" />
         </Section>
 

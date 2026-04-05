@@ -2,46 +2,20 @@ import cropzenImg from "../assets/cropzen.png";
 import tixgoImg from "../assets/tixgo.png";
 import botaniImg from "../assets/botani.png";
 import onwayImg from "../assets/OnWay.png";
+import sanzistry from "../assets/sanzistry.png";
 
 export const projects = [
   {
-    id: "cropzen",
-    name: "Cropzen — Smart Crop Marketplace",
-    image: cropzenImg, // update if different
-    stack: [
-      "React",
-      "React Router",
-      "Tailwind CSS",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Firebase Auth",
-      "Recharts",
-    ],
-    live: "https://cropzen.netlify.app/",
-    github: "https://github.com/Zarif207/cropzen-client.git", // update repo
+    id: "sanzistry",
+    name: "Sanzistry — Art E-commerce Platform",
+    image: sanzistry,
+    status: "ongoing",
+    stack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Stripe"],
     description:
-      "A modern crop trading platform connecting farmers and buyers in a seamless marketplace where crops can be listed, interests managed, and transactions tracked through an interactive dashboard.",
-    challenges: [
-      "Designing a bidirectional interest system between farmers and buyers",
-      "Keeping crop quantity in sync after interest acceptance",
-      "Managing role-based dashboards and protected routes",
-      "Ensuring instant UI updates without page reloads",
-    ],
-    features: [
-      "Dynamic crop listing with pricing and quantity control",
-      "Buyer interest system with messaging and quantity selection",
-      "Interactive dashboard with accept/reject workflow",
-      "Automatic stock updates after interest approval",
-      "Secure authentication with Firebase",
-      "Responsive UI with protected routes and custom 404 page",
-    ],
-    future: [
-      "In-app real-time chat between farmers and buyers",
-      "Payment gateway integration",
-      "Admin moderation dashboard",
-      "Advanced analytics for crop demand trends",
-    ],
+      "An e-commerce art showcase platform where artists can display and sell their artwork. Featuring curated galleries, artist profiles, and a seamless buying experience.",
+    challenges: [],
+    features: [],
+    future: [],
   },
 
   {
@@ -161,6 +135,46 @@ export const projects = [
       "Real-time booking notifications",
       "Multi-language support",
       "Vendor analytics dashboard",
+    ],
+  },
+
+  {
+    id: "cropzen",
+    name: "Cropzen — Smart Crop Marketplace",
+    image: cropzenImg, // update if different
+    stack: [
+      "React",
+      "React Router",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Firebase Auth",
+      "Recharts",
+    ],
+    live: "https://cropzen.netlify.app/",
+    github: "https://github.com/Zarif207/cropzen-client.git", // update repo
+    description:
+      "A modern crop trading platform connecting farmers and buyers in a seamless marketplace where crops can be listed, interests managed, and transactions tracked through an interactive dashboard.",
+    challenges: [
+      "Designing a bidirectional interest system between farmers and buyers",
+      "Keeping crop quantity in sync after interest acceptance",
+      "Managing role-based dashboards and protected routes",
+      "Ensuring instant UI updates without page reloads",
+    ],
+    features: [
+      "Dynamic crop listing with pricing and quantity control",
+      "Buyer interest system with messaging and quantity selection",
+      "Interactive dashboard with accept/reject workflow",
+      "Automatic stock updates after interest approval",
+      "Secure authentication with Firebase",
+      "Responsive UI with protected routes and custom 404 page",
+    ],
+    future: [
+      "In-app real-time chat between farmers and buyers",
+      "Payment gateway integration",
+      "Admin moderation dashboard",
+      "Advanced analytics for crop demand trends",
     ],
   },
 
