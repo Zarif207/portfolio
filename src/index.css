@@ -1,6 +1,38 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* ── CUSTOM SCROLLBAR ───────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 4;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff #1a1a1a;
+}
+
+/* ── GLOBAL LINK RESET ──────────────────────────── */
+a {
+  text-decoration: none;
+}
+
 @keyframes icon-flash {
   0%   { opacity: 1; }
   15%  { opacity: 0; }
@@ -8,6 +40,49 @@
   45%  { opacity: 0.2; }
   60%  { opacity: 1; }
   100% { opacity: 1; }
+}
+
+@keyframes input-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(0,255,159,0.08); }
+  50%       { box-shadow: 0 0 0 1px rgba(0,255,159,0.2), 0 0 20px rgba(0,255,159,0.06); }
+}
+
+/* ── CONTACT FIELDS ─────────────────────────────── */
+.contact-field {
+  background: #000 !important;
+  color: #e5e5e5;
+  caret-color: #00ff9f;
+  border-radius: 0;
+  -webkit-text-fill-color: #e5e5e5 !important;
+}
+
+.contact-field::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.contact-field:hover {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Green text + border only while focused */
+.contact-field:focus {
+  color: #00ff9f !important;
+  -webkit-text-fill-color: #00ff9f !important;
+  border-color: rgba(0, 255, 159, 0.35) !important;
+  box-shadow: none;
+  outline: none !important;
+}
+
+/* Kill browser autofill completely */
+.contact-field:-webkit-autofill,
+.contact-field:-webkit-autofill:hover,
+.contact-field:-webkit-autofill:focus,
+.contact-field:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #000 inset !important;
+  -webkit-text-fill-color: #e5e5e5 !important;
+  caret-color: #00ff9f;
+  transition: background-color 9999s ease-in-out 0s;
 }
 
 .social-icon:hover,

@@ -1,89 +1,266 @@
-import { FaArrowUp } from "react-icons/fa";
+import { useState, useRef } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.09, ease: [0.25, 0.1, 0.25, 1] },
+  }),
+};
 
 export default function Contact() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const formRef = useRef(null);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("idle");
+
+  const handleChange = (e) => {
+    const key = e.target.name === "user_name" ? "name"
+              : e.target.name === "user_email" ? "email"
+              : e.target.name;
+    setForm({ ...form, [key]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      await emailjs.sendForm(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        formRef.current,
+        "YOUR_PUBLIC_KEY",
+      );
+      setStatus("success");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
+    setTimeout(() => setStatus("idle"), 4000);
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-28 sm:py-40 text-center text-white overflow-hidden bg-[#0b0b0b]"
-    >
-      {/* GRID BACKGROUND */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+    <section id="contact" className="relative py-28 sm:py-36 overflow-hidden">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
+        {/* HEADING */}
+        <motion.div
+          className="text-center mb-20"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl tracking-[0.25em] font-bold text-white">
+            CONTACT
+          </h2>
+          <div className="w-14 h-[2px] bg-white mx-auto mt-4" />
+        </motion.div>
 
-      {/* DECORATIVE SQUARES */}
-      <div className="absolute left-1/4 top-1/2 w-4 h-4 border border-white/40 hidden sm:block" />
-      <div className="absolute right-1/4 top-1/2 w-4 h-4 bg-white/40 hidden sm:block" />
-
-      {/* CONTENT */}
-      <div className="relative z-10 px-4 sm:px-6">
-        <h2 className="text-2xl sm:text-3xl tracking-[0.3em] mb-4">CONTACT</h2>
-        <div className="w-10 h-[2px] bg-white mx-auto mb-8 sm:mb-10" />
-
-        <p className="max-w-xl mx-auto text-sm text-gray-400 leading-relaxed mb-10 sm:mb-14">
-          I'm always looking for opportunities to build and scale real-world
-          applications using the MERN stack alongside passionate developers.
-          <br /> <br />
-          Let's build intelligent solutions together.
-        </p>
-
-        {/* ACTIONS */}
-        <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-5 sm:gap-8 text-sm mb-16 sm:mb-20">
-          <a
-            href="mailto:zarifhasan207@gmail.com"
-            className="w-full sm:w-auto border border-white/60 px-6 py-3 sm:py-2 tracking-widest hover:bg-white hover:text-black transition"
+        <div className="grid md:grid-cols-2 gap-14 md:gap-20 items-start">
+          {/* LEFT */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={1}
+            className="space-y-10"
           >
-            SEND EMAIL
-          </a>
+            <div className="space-y-5">
+              <h3 className="text-[1.7rem] sm:text-[2.1rem] font-bold text-white leading-[1.15] tracking-tight">
+                Let's Build
+                <br />
+                <span className="text-white/40 font-light">
+                  Something That Actually Matters.
+                </span>
+              </h3>
+              <p className="text-sm text-gray-500 leading-[1.95] max-w-[340px]">
+                Got an idea? A problem? Or just curiosity? If it’s interesting,
+                challenging, or slightly crazy — I’m in. Let’s talk.
+              </p>
+            </div>
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 text-gray-300 tracking-widest">
-            <a
-              href="https://github.com/Zarif207"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition border-b border-transparent hover:border-white pb-1"
-            >
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/zarif-hasan5/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition border-b border-transparent hover:border-white pb-1"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://web.facebook.com/zarif.hasan.5059"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition border-b border-transparent hover:border-white pb-1"
-            >
-              Facebook
-            </a>
-            <a
-              href="tel:+8801648117509"
-              className="hover:text-white transition border-b border-transparent hover:border-white pb-1"
-            >
-              Phone
-            </a>
-          </div>
+            {/* ICON-ONLY LINKS */}
+            <div className="flex gap-3">
+              {[
+                {
+                  href: "mailto:zarifhasan207@gmail.com",
+                  icon: <FaEnvelope />,
+                  label: "Email",
+                },
+                {
+                  href: "https://wa.me/8801648117509",
+                  icon: <FaWhatsapp />,
+                  label: "WhatsApp",
+                },
+              ].map(({ href, icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={label}
+                  className="social-icon w-11 h-11 border border-white/25 flex items-center justify-center text-white text-[1.6rem] transition-all duration-200 ease-in-out hover:bg-white hover:text-black hover:border-white"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* RIGHT — FORM */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={2}
+          >
+            <AnimatePresence mode="wait">
+              {status === "success" ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="min-h-[380px] border border-[#00ff9f]/15 bg-black flex flex-col items-center justify-center gap-5 p-10 text-center"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 18,
+                      delay: 0.1,
+                    }}
+                    className="w-14 h-14 border border-[#00ff9f]/40 flex items-center justify-center text-2xl text-[#00ff9f]"
+                  >
+                    ✓
+                  </motion.div>
+                  <p className="text-[#00ff9f] tracking-[0.25em] text-sm">
+                    MESSAGE SENT
+                  </p>
+                  <p className="text-gray-600 text-xs tracking-wide">
+                    I'll get back to you soon.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  ref={formRef}
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <Field
+                      label="Name"
+                      name="user_name"
+                      value={form.name}
+                      onChange={handleChange}
+                      delay={3}
+                    />
+                    <Field
+                      label="Email"
+                      name="user_email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      delay={4}
+                    />
+                  </div>
+                  <Field
+                    label="Subject"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    delay={5}
+                  />
+
+                  {/* TEXTAREA */}
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={6}
+                    className="relative"
+                  >
+                    <textarea
+                      name="message"
+                      rows={5}
+                      required
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder="Message"
+                      autoComplete="off"
+                      className="contact-field w-full px-4 py-3 text-sm border border-white/10 outline-none resize-none transition-all duration-300"
+                    />
+                  </motion.div>
+
+                  <motion.div
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    custom={7}
+                  >
+                    <motion.button
+                      type="submit"
+                      disabled={status === "sending"}
+                      whileHover={{ scale: 1.015 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full border border-white/40 py-3.5 text-[11px] tracking-[0.3em] text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 mt-1 disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                      {status === "sending" ? "SENDING..." : "SEND MESSAGE"}
+                    </motion.button>
+                    {status === "error" && (
+                      <p className="text-red-400/70 text-xs tracking-wide mt-2 text-center">
+                        Failed ❌ Try emailing directly.
+                      </p>
+                    )}
+                  </motion.div>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
-
-        <div className="w-full max-w-4xl mx-auto h-px bg-white/20 mb-6" />
-        <p className="text-xs text-gray-500 tracking-widest">© 2026 Zarif Hasan</p>
       </div>
-
-      {/* SCROLL TO TOP */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 left-6 z-50 w-10 h-10 border border-white/60 flex items-center justify-center hover:bg-white hover:text-black transition"
-        aria-label="Scroll to top"
-      >
-        <FaArrowUp className="text-sm" />
-      </button>
     </section>
+  );
+}
+
+function Field({ label, name, type = "text", value, onChange, delay = 0 }) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      custom={delay}
+    >
+      <input
+        type={type}
+        name={name}
+        required
+        value={value}
+        onChange={onChange}
+        placeholder={label}
+        autoComplete="off"
+        className="contact-field w-full px-4 py-3 text-sm border border-white/10 outline-none transition-all duration-300"
+      />
+    </motion.div>
   );
 }
