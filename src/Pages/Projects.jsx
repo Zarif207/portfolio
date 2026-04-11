@@ -25,12 +25,20 @@ export default function Projects() {
               >
                 {/* TEAM BADGE — OnWay only */}
                 {p.id === "onway" && (
-                  <>
-                    <div className="absolute top-0 right-0 w-0 h-0 border-t-[72px] border-l-[72px] sm:border-t-[84px] sm:border-l-[84px] border-t-white border-l-transparent z-10 pointer-events-none" />
-                    <span className="absolute top-[14px] right-[6px] sm:top-[16px] sm:right-[7px] z-20 text-black text-[9px] sm:text-[10px] font-extrabold tracking-tight rotate-45 leading-none pointer-events-none">
-                      TEAM
-                    </span>
-                  </>
+                  <div className="absolute top-0 right-0 z-10 overflow-hidden w-[84px] h-[84px] pointer-events-none">
+                    <div className="absolute top-[18px] right-[-22px] w-[95px] bg-white rotate-45 flex items-center justify-center py-[3px]">
+                      <span className="text-black text-[9px] font-extrabold tracking-widest">TEAM</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* CLIENT BADGE — Sanzistry only */}
+                {p.id === "sanzistry" && (
+                  <div className="absolute top-0 right-0 z-10 overflow-hidden w-[84px] h-[84px] pointer-events-none">
+                    <div className="absolute top-[18px] right-[-22px] w-[95px] bg-white rotate-45 flex items-center justify-center py-[3px]">
+                      <span className="text-black text-[9px] font-extrabold tracking-widest">CLIENT</span>
+                    </div>
+                  </div>
                 )}
                 {/* Image */}
                 <div className="relative border border-white/40 mb-5 sm:mb-6">

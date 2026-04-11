@@ -7,7 +7,7 @@ import sanzistry from "../assets/sanzistry.png";
 export const projects = [
   {
     id: "sanzistry",
-    name: "Sanzistry — Art E-commerce Platform",
+    name: "Sanzistry — Art Gallery",
     image: sanzistry,
     status: "ongoing",
     stack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Stripe"],

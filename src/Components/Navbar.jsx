@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [blinkId, setBlinkId] = useState(null);
+  const prevActiveRef = useRef("home");
   const tickingRef = useRef(false);
 
   const links = [
@@ -37,7 +39,12 @@ export default function Navbar() {
           if (!el) continue;
           const rect = el.getBoundingClientRect();
           if (rect.top <= offset && rect.bottom >= offset) {
-            setActiveSection(id);
+            if (id !== prevActiveRef.current) {
+              prevActiveRef.current = id;
+              setActiveSection(id);
+              setBlinkId(id);
+              setTimeout(() => setBlinkId(null), 400);
+            }
             break;
           }
         }
@@ -69,7 +76,7 @@ export default function Navbar() {
               onClick={() => scrollToSection(id)}
               className={`relative cursor-pointer transition ${
                 activeSection === id ? "opacity-100" : "opacity-80 hover:opacity-100"
-              }`}
+              } ${blinkId === id ? "nav-underline-blink" : ""}`}
             >
               <span
                 className={`after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[1px] after:bg-white after:transition-all after:duration-300 ${

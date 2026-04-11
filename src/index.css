@@ -16,7 +16,7 @@ html, body {
 }
 ::-webkit-scrollbar-thumb {
   background: #ffffff;
-  border-radius: 4;
+  border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #ffffff;
@@ -26,6 +26,39 @@ html, body {
 html {
   scrollbar-width: thin;
   scrollbar-color: #ffffff #1a1a1a;
+}
+
+/* ── NAV UNDERLINE BLINK ────────────────────────── */
+@keyframes nav-underline-blink {
+  0%   { opacity: 1; }
+  20%  { opacity: 0; }
+  45%  { opacity: 1; }
+  65%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.nav-underline-blink {
+  animation: nav-underline-blink 0.35s ease-in-out forwards;
+}
+
+/* ── QUOTE BLINK ────────────────────────────────── */
+@keyframes quote-blink {
+  0%   { opacity: 1; }
+  15%  { opacity: 0; }
+  30%  { opacity: 1; }
+  50%  { opacity: 0.15; }
+  65%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.quote-blink {
+  animation: quote-blink 0.5s ease-in-out forwards;
+}
+.footer-link {
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.footer-link:hover {
+  animation: icon-flash 0.35s ease-in-out forwards;
 }
 
 /* ── GLOBAL LINK RESET ──────────────────────────── */

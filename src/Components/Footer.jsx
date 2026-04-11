@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { FaArrowUp } from "react-icons/fa";
+import { FaArrowUp, FaQuoteLeft } from "react-icons/fa";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -18,6 +19,15 @@ const links = [
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const [glowing, setGlowing] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlowing(true);
+      setTimeout(() => setGlowing(false), 600);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <footer className="relative w-full py-32 text-center text-white overflow-hidden bg-[#0a0a0a]">
@@ -29,41 +39,50 @@ export default function Footer() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.012] rounded-full blur-[120px] pointer-events-none" />
 
       {/* DECORATIVE SQUARES */}
-      <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-3 h-3 border border-white/15 hidden sm:block" />
-      <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-3 h-3 bg-white/15 hidden sm:block" />
+      <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-3 h-3 border border-white/10 hidden sm:block" />
+      <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-3 h-3 bg-white/10 hidden sm:block" />
 
-      <div className="relative z-10 w-full max-w-2xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-xl mx-auto px-4 sm:px-6">
 
-        {/* HEADING */}
+        {/* DIVIDER TOP */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible"
           viewport={{ once: true }} custom={0}
         >
-          {/* <h2 className="text-3xl sm:text-4xl tracking-[0.3em] font-bold text-white mb-4">
-            CONTACT
-          </h2> */}
-          <div className="w-10 h-[2px] bg-white mx-auto mb-10" />
+          <div className="w-13 h-[3px] bg-white mx-auto mb-30" />
         </motion.div>
 
-        {/* TEXT */}
+        {/* QUOTE BLOCK */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible"
           viewport={{ once: true }} custom={1}
-          className="mb-14 space-y-1"
+          className="mb-20"
         >
-          <p className="text-sm text-gray-400 tracking-wide">
-            I'm always open to building something meaningful.
-          </p>
-          <p className="text-sm text-gray-500 tracking-wide">
-            Got an idea? Let's make it real.
+          {/* quote icon */}
+          <FaQuoteLeft
+            className="mx-auto mb-5 text-white/20"
+            style={{ fontSize: "1.4rem", filter: "drop-shadow(0 0 6px rgba(255,255,255,0.08))" }}
+          />
+
+          {/* quote text */}
+          <p
+            className={`text-sm leading-[2] tracking-[0.04em] max-w-md mx-auto ${glowing ? "quote-blink" : ""}`}
+            style={{
+              color: "#d4d4d4",
+              textShadow: "0 0 8px rgba(255,255,255,0.07)",
+            }}
+          >
+            I'm the type of person that if you ask me a question and I don't
+            know the answer, I'm gonna tell you that I don't know. But I bet
+            you what: I know how to find the answer, and I will find the answer.
           </p>
         </motion.div>
 
-        {/* CTA ROW */}
+        {/* LINKS */}
         <motion.div
           variants={fadeUp} initial="hidden" whileInView="visible"
           viewport={{ once: true }} custom={2}
-          className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-20"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-20"
         >
           {links.map(({ label, href }) => (
             <a
@@ -71,16 +90,15 @@ export default function Footer() {
               href={href}
               target={label !== "Phone" ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="social-icon relative text-xs text-gray-500 tracking-widest hover:text-white transition-colors duration-300 group"
+              className="footer-link text-[11px] text-gray-500 tracking-[0.15em] px-3 py-1.5 border border-transparent transition-all duration-200 ease-in-out hover:text-white hover:border-white/50 hover:scale-105"
             >
               {label}
-              <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-white/40 group-hover:w-full transition-all duration-300 ease-out" />
             </a>
           ))}
         </motion.div>
 
-        {/* DIVIDER */}
-        <div className="w-full max-w-lg mx-auto h-px bg-white/[0.08] mb-8" />
+        {/* DIVIDER BOTTOM */}
+        <div className="w-full h-px bg-white/[0.07] mb-8" />
 
         {/* COPYRIGHT */}
         <motion.p
@@ -106,3 +124,4 @@ export default function Footer() {
     </footer>
   );
 }
+
