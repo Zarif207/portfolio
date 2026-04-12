@@ -1,8 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+
+const SERVICE_ID  = "service_asp3djs";
+const TEMPLATE_ID = "template_ymvkd5o";
+const PUBLIC_KEY  = "mM51xjyxdEIhyAAaj";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -14,14 +18,12 @@ const fadeUp = {
 };
 
 export default function Contact() {
-  const formRef = useRef(null);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState("idle");
+
+  useEffect(() => {
+    emailjs.init(PUBLIC_KEY);
+  }, []);
 
   const handleChange = (e) => {
     const key = e.target.name === "user_name" ? "name"
@@ -32,20 +34,30 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // basic validation
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+
     setStatus("sending");
+
     try {
-      await emailjs.sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        formRef.current,
-        "YOUR_PUBLIC_KEY",
-      );
+      console.log("Sending:", form);
+      const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        user_name:  form.name,
+        user_email: form.email,
+        subject:    form.subject || "No Subject",
+        message:    form.message,
+      });
+
+      console.log("SUCCESS", res);
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
-    } catch {
+    } catch (err) {
+      console.error("ERROR", err);
       setStatus("error");
     }
-    setTimeout(() => setStatus("idle"), 4000);
+
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -158,7 +170,6 @@ export default function Contact() {
               ) : (
                 <motion.form
                   key="form"
-                  ref={formRef}
                   onSubmit={handleSubmit}
                   className="space-y-4"
                   initial={{ opacity: 0 }}
@@ -228,7 +239,7 @@ export default function Contact() {
                     </motion.button>
                     {status === "error" && (
                       <p className="text-red-400/70 text-xs tracking-wide mt-2 text-center">
-                        Failed ❌ Try emailing directly.
+                        Failed ❌ Try again later.
                       </p>
                     )}
                   </motion.div>
