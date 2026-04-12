@@ -105,9 +105,14 @@ $ git push`}
         </motion.div>
 
         {/* NAME */}
-        <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white">
+        <motion.h1
+          className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white"
+          initial={{ opacity: 0, letterSpacing: "0.5em" }}
+          animate={{ opacity: 1, letterSpacing: "0.25em" }}
+          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+        >
           ZARIF HASAN
-        </h1>
+        </motion.h1>
 
         <div className="w-16 h-[2px] bg-white mx-auto my-5 sm:my-6" />
 

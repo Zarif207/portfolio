@@ -1,5 +1,9 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const [matrix, setMatrix] = useState([]);
@@ -10,6 +14,19 @@ export default function About() {
   const terminalRef = useRef(null);
   const hasTypedRef = useRef(false);
   const terminalEndRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    if (!lineRef.current) return;
+    gsap.fromTo(
+      lineRef.current,
+      { scaleX: 0, transformOrigin: "left" },
+      {
+        scaleX: 1, duration: 1.2, ease: "power3.out",
+        scrollTrigger: { trigger: lineRef.current, start: "top 85%" },
+      }
+    );
+  }, []);
 
   useEffect(() => {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -146,6 +163,7 @@ export default function About() {
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           ABOUT ME_
+          <div ref={lineRef} className="w-16 h-[2px] bg-white mt-3" />
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
@@ -211,6 +229,10 @@ export default function About() {
               target="_blank"
               rel="noopener noreferrer"
               className="mt-10 px-7 py-3 bg-transparent border-2 border-white text-white text-xs font-bold tracking-widest transition-all duration-300 hover:bg-white hover:text-black inline-block w-full sm:w-auto text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.02, boxShadow: "0 0 12px rgba(255,255,255,0.6)" }}
               whileTap={{ scale: 0.98 }}
             >

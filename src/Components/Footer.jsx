@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowUp, FaQuoteLeft } from "react-icons/fa";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,6 +24,7 @@ const links = [
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const [glowing, setGlowing] = useState(false);
+  const bottomLineRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,18 +34,35 @@ export default function Footer() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!bottomLineRef.current) return;
+    gsap.fromTo(
+      bottomLineRef.current,
+      { scaleX: 0, transformOrigin: "center" },
+      {
+        scaleX: 1, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: bottomLineRef.current, start: "top 95%" },
+      }
+    );
+  }, []);
+
   return (
     <footer className="relative w-full py-32 text-center text-white overflow-hidden bg-[#0a0a0a]">
 
       {/* GRID */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+        backgroundSize: "30px 30px",
+        backgroundPosition: "top left",
+        backgroundAttachment: "fixed",
+      }} />
 
       {/* AMBIENT */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.012] rounded-full blur-[120px] pointer-events-none" />
 
       {/* DECORATIVE SQUARES */}
-      <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-3 h-3 border border-white/10 hidden sm:block" />
-      <div className="absolute right-1/4 top-1/2 -translate-y-1/2 w-3 h-3 bg-white/10 hidden sm:block" />
+      <div className="absolute left-[calc(25%-6px)] top-16 w-3 h-3 border border-white/10 hidden sm:block" />
+      <div className="absolute right-[calc(25%-6px)] top-16 w-3 h-3 bg-white/10 hidden sm:block" />
 
       <div className="relative z-10 w-full max-w-xl mx-auto px-4 sm:px-6">
 
@@ -59,14 +81,21 @@ export default function Footer() {
           className="mb-20"
         >
           {/* quote icon */}
-          <FaQuoteLeft
-            className="mx-auto mb-5 text-white/20"
-            style={{ fontSize: "1.4rem", filter: "drop-shadow(0 0 6px rgba(255,255,255,0.08))" }}
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "backOut" }}
+          >
+            <FaQuoteLeft
+              className="mx-auto mb-5 text-white/20"
+              style={{ fontSize: "1.4rem", filter: "drop-shadow(0 0 6px rgba(255,255,255,0.08))" }}
+            />
+          </motion.div>
 
           {/* quote text */}
           <p
-            className={`text-sm leading-[2] tracking-[0.04em] max-w-md mx-auto ${glowing ? "quote-blink" : ""}`}
+            className={`text-sm leading-[2] tracking-[0.04em] max-w-md mx-auto italic ${glowing ? "quote-blink" : ""}`}
             style={{
               color: "#d4d4d4",
               textShadow: "0 0 8px rgba(255,255,255,0.07)",
@@ -98,7 +127,7 @@ export default function Footer() {
         </motion.div>
 
         {/* DIVIDER BOTTOM */}
-        <div className="w-full h-px bg-white/[0.07] mb-8" />
+        <div ref={bottomLineRef} className="w-full h-px bg-white/[0.07] mb-8" />
 
         {/* COPYRIGHT */}
         <motion.p

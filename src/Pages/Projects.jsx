@@ -1,24 +1,50 @@
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "../Data/projects";
+import { fadeUp, scaleIn, viewport } from "../Aminations/scrollVariants";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      lineRef.current,
+      { scaleX: 0, transformOrigin: "center" },
+      {
+        scaleX: 1, duration: 1, ease: "power3.out",
+        scrollTrigger: { trigger: lineRef.current, start: "top 85%" },
+      }
+    );
+  }, []);
+
   return (
     <section id="projects" className="relative py-24 sm:py-32 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14 sm:mb-20">
+        <motion.div
+          className="text-center mb-14 sm:mb-20"
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport}
+        >
           <h2 className="text-3xl sm:text-4xl tracking-widest font-bold text-white">
             PROJECTS
           </h2>
-          <div className="w-14 h-[2px] bg-white mx-auto mt-4" />
-        </div>
+          <div ref={lineRef} className="w-14 h-[2px] bg-white mx-auto mt-4" />
+        </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
-          {projects.map((p) => {
+          {projects.map((p, idx) => {
             const isOngoing = p.status === "ongoing";
 
             return (
-              <div
+              <motion.div
                 key={p.id}
+                variants={scaleIn} initial="hidden" whileInView="visible"
+                viewport={viewport} custom={idx % 3}
                 className={`relative overflow-hidden border p-5 sm:p-6 transition ${
                   isOngoing ? "border-yellow-500/40 opacity-80" : "border-white/60"
                 }`}
@@ -82,7 +108,7 @@ export default function Projects() {
                     DETAILS →
                   </Link>
                 )}
-              </div>
+              </motion.div>
             );
           })}
         </div>
