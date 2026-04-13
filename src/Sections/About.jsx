@@ -260,7 +260,10 @@ export default function About() {
                   <span className="text-xs text-gray-400 font-mono ml-2">terminal</span>
                 </div>
 
-                <div className="relative z-10 p-4 sm:p-5 h-80 sm:h-[36rem] md:h-[48rem] overflow-y-auto font-mono text-sm scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">
+                <div 
+                  data-lenis-prevent
+                  className="relative z-10 p-4 sm:p-5 h-80 sm:h-[36rem] md:h-[48rem] overflow-y-auto font-mono text-sm scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent pointer-events-auto"
+                >
                   {terminalLines.map((line, index) => (
                     <motion.div
                       key={index}
