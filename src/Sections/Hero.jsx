@@ -26,7 +26,7 @@ export default function Hero() {
           animate={{ y: [0, -18, 0] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         >
-{`const app = express()
+          {`const app = express()
 app.use(cors())
 app.listen(8800)`}
         </motion.pre>
@@ -36,7 +36,7 @@ app.listen(8800)`}
           animate={{ y: [0, 14, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         >
-{`async function fetchData() {
+          {`async function fetchData() {
   const res = await api.get()
 }`}
         </motion.pre>
@@ -46,8 +46,8 @@ app.listen(8800)`}
           animate={{ y: [0, 16, 0] }}
           transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
         >
-{`db.users.find({
-  role: "admin"
+          {`db.users.find({
+  role: "mern"
 })`}
         </motion.pre>
 
@@ -56,7 +56,7 @@ app.listen(8800)`}
           animate={{ y: [0, -14, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         >
-{`db.projects.insertOne({
+          {`db.projects.insertOne({
   name: "Portfolio"
 })`}
         </motion.pre>
@@ -66,8 +66,8 @@ app.listen(8800)`}
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         >
-{`$ git add .
-$ git commit -m "fixed some issues"
+          {`$ git add .
+$ git commit -m "I swear this was working yesterday"
 $ git push`}
         </motion.pre>
       </div>

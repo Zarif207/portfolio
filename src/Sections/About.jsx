@@ -225,7 +225,7 @@ export default function About() {
             </div>
 
             <motion.a
-              href="https://drive.google.com/file/d/1cDUxLG8PgAn1a_BmcE4SYpElkQO15U4z/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1H_GJaC7KPuOPjYp4mFLQ-32KCl5vfDnJ/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-10 px-7 py-3 bg-transparent border-2 border-white text-white text-xs font-bold tracking-widest transition-all duration-300 hover:bg-white hover:text-black inline-block w-full sm:w-auto text-center"
@@ -260,7 +260,7 @@ export default function About() {
                   <span className="text-xs text-gray-400 font-mono ml-2">terminal</span>
                 </div>
 
-                <div 
+                <div
                   data-lenis-prevent
                   className="relative z-10 p-4 sm:p-5 h-80 sm:h-[36rem] md:h-[48rem] overflow-y-auto font-mono text-sm scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent pointer-events-auto"
                 >
