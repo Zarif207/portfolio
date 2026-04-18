@@ -67,7 +67,7 @@ app.listen(8800)`}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         >
           {`$ git add .
-$ git commit -m "I swear this was working yesterday"
+$ git commit -m "who wrote this? oh... me"
 $ git push`}
         </motion.pre>
       </div>
